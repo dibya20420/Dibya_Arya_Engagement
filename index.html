@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Dibya Ranjan &amp; Arya Prabha — Engagement</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Canvas Confetti Library for Celebration Effect -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="stage">
+      <!-- PAGE 1 / INITIAL LANDING & VIDEO STAGE -->
+      <div class="scene">
+        <!-- Landing Base Image -->
+        <img
+          id="bgLanding"
+          class="bg-layer bg-landing"
+          src="./bg-landing.png"
+          alt="Temple Exterior"
+        />
+
+        <!-- Final Invitation Image -->
+        <img
+          id="bgInvitation"
+          class="bg-layer bg-invitation"
+          src="./bg-invitation.png"
+          alt="Temple Interior"
+        />
+
+        <!-- Transition Video Layer -->
+        <video
+          id="transitionVideo"
+          class="bg-layer bg-video"
+          playsinline
+          preload="auto"
+          muted
+        >
+          <source src="./transition.mp4" type="video/mp4" />
+        </video>
+
+        <audio
+          id="weddingAudio"
+          loop
+          preload="auto"
+          aria-label="Wedding mashup instrumental"
+        >
+          <source
+            src="./Wedding_Mashup_Instrumental.mp3"
+            type="audio/mpeg"
+          />
+        </audio>
+
+        <!-- Badge Overlay (Page 1) -->
+        <div class="badge-container" id="badgeContainer">
+          <div class="badge-custom-wrapper" id="openInvitationButton">
+            <div class="badge-circle-outer"></div>
+            <div class="badge-circle-halo"></div>
+            <div class="badge-circle-core">
+              <div class="badge-inner-border"></div>
+              <div class="badge-star-icon">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                  ></polygon>
+                </svg>
+              </div>
+              <h1 class="monogram-heading">
+                D<span class="monogram-ampersand">&amp;</span>A
+              </h1>
+              <div class="badge-gold-line"></div>
+              <span class="badge-tap-text">Tap to Open</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invitation Top Section Overlay -->
+        <div class="invitation-overlay" id="invitationOverlay">
+          <div class="content-block">
+            <p class="sub-title">The Engagement Of</p>
+            <h1 class="couple-names">
+              Dibya Ranjan
+              <span class="ampersand">&amp;</span>
+              Arya Prabha
+            </h1>
+            <div class="gold-ornament"><span>◈</span></div>
+            <div class="venue-details">
+              <p class="venue-title">KIIT College</p>
+              <p class="venue-location">Jagannath Puri Temple</p>
+              <div class="gold-ornament"><span>◈</span></div>
+              <p class="city-name">Bhubaneswar</p>
+            </div>
+          </div>
+
+          <!-- Tap to Scroll Down Button -->
+          <div
+            class="mouse-scroll-indicator"
+            id="scrollBtn"
+            onclick="scrollToCoupleSection()"
+          >
+            <div class="mouse-capsule">
+              <div class="mouse-wheel"></div>
+            </div>
+            <div class="chevron-down"></div>
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="audio-toggle"
+        id="audioToggle"
+        type="button"
+        aria-pressed="true"
+        aria-label="Mute wedding music"
+      >
+        <span class="audio-toggle-icon" aria-hidden="true">♫</span>
+      </button>
+
+      <!-- PAGE 2 / COUPLE DETAILS & ALL INVITATION SECTIONS -->
+      <section class="couple-section" id="coupleSection">
+        <!-- Hanging Pendulum Bells -->
+        <img
+          alt="Temple Bell"
+          class="bell-img bell-top-left-outer"
+          src="./bell.png"
+        />
+        <img
+          alt="Temple Bell"
+          class="bell-img bell-top-left-inner"
+          src="./bell.png"
+        />
+        <img
+          alt="Temple Bell"
+          class="bell-img bell-top-right-outer"
+          src="./bell.png"
+        />
+        <img
+          alt="Temple Bell"
+          class="bell-img bell-top-right-inner"
+          src="./bell.png"
+        />
+
+        <div class="wedding-container">
+          <!-- SECTION 1: MEET THE COUPLE -->
+          <div class="section-title-container" id="coupleTitle">
+            <span class="sub-heading-text">Beginning of Forever</span>
+            <h2 class="main-heading-text">Meet the Couple</h2>
+            <div class="gold-divider-line"></div>
+          </div>
+
+          <!-- Couple Showcase Grid -->
+          <div class="couple-cards-grid">
+            <!-- Groom Card -->
+            <div class="couple-card-wrapper groom-wrapper-anim" id="groomCard">
+              <img alt="" class="mandala-bg-groom" src="./round-mondal.png" />
+              <div
+                class="photo-frame-styled"
+                onclick="openZoomModal('./IMG-20260829-WA0044.jpg')"
+              >
+                <img
+                  alt="Groom - Dibya Ranjan Panigrahi"
+                  class="person-photo"
+                  src="./IMG-20260829-WA0044.jpg"
+                />
+              </div>
+              <div class="person-details">
+                <span class="role-tag">The Groom</span>
+                <h3 class="person-title">Dibya Ranjan Panigrahi</h3>
+                <p class="blessing-subtitle">With Divine Blessings...</p>
+                <div class="family-info-box groom-box">
+                  <p class="family-text">
+                    Son of Shri Mayadhar Panigrahi &amp; Smt. Sumanjali Panigrahi
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Animated Center Heart -->
+            <div class="heart-divider-wrapper">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="heart-icon"
+              >
+                <path
+                  d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"
+                ></path>
+              </svg>
+            </div>
+
+            <!-- Bride Card -->
+            <div class="couple-card-wrapper bride-wrapper-anim" id="brideCard">
+              <img alt="" class="mandala-bg-bride" src="./round-mondal.png" />
+              <div
+                class="photo-frame-styled"
+                onclick="openZoomModal('./IMG-20260422-WA0000.jpg')"
+              >
+                <img
+                  alt="Bride - Arya Prabha"
+                  class="person-photo"
+                  src="./IMG-20260422-WA0000.jpg"
+                />
+              </div>
+              <div class="person-details">
+                <span class="role-tag">The Bride</span>
+                <h3 class="person-title">Arya Prabha Chakravarty</h3>
+                <p class="blessing-subtitle">In the presence of love...</p>
+                <div class="family-info-box bride-box">
+                  <p class="family-text">Daughter of Shri PC Chakravarty&amp; Smt. Manswani Chakravarty</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: QUOTE CARD WITH TEMPLE BACKGROUND -->
+          <div class="quote-section-wrapper">
+            <div class="quote-card-container">
+              <div class="quote-content-box">
+                <img alt="" class="tree-wing tree-left" src="./flower-3.png" />
+                <p class="quote-body-text">
+                  "Under the beautiful canopy of divine grace, two hearts unite
+                  in holy matrimony. A sacred covenant of eternal love,
+                  happiness, and shared dreams."
+                </p>
+                <p class="quote-author-tag">— A DIVINE PROMISE</p>
+                <img alt="" class="tree-wing tree-right" src="./flower-3.png" />
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 3: COUNTDOWN & SACRED GATES -->
+          <section class="countdown-gates-section">
+            <!-- Blurred Temple Background Layer -->
+            <div class="countdown-bg-layer"></div>
+
+            <div class="section-title-container">
+              <span class="sub-heading-text">Join the Celebration</span>
+              <h3 class="main-heading-text">Counting Down the Days</h3>
+              <p class="gates-instruction-text">
+                Tap the sacred center ring to swing the golden sanctuary gates
+                open
+              </p>
+            </div>
+
+            <div class="sanctuary-gates-frame">
+              <!-- Hidden Countdown Reveal Layer -->
+              <div class="countdown-inner-content">
+                <span class="date-header-tag">Our Engagement Date</span>
+                <h4 class="wedding-date-heading">Sunday, 25 October 2026</h4>
+                <span class="venue-location-subtag"
+                  >October 25, 2026 • Jagannath Temple near KIIT college</span
+                >
+                <div class="countdown-units-grid">
+                  <div class="timer-box">
+                    <span class="timer-num">00</span>
+                    <span class="timer-unit">days</span>
+                  </div>
+                  <div class="timer-box">
+                    <span class="timer-num">00</span>
+                    <span class="timer-unit">hours</span>
+                  </div>
+                  <div class="timer-box">
+                    <span class="timer-num">00</span>
+                    <span class="timer-unit">minutes</span>
+                  </div>
+                  <div class="timer-box">
+                    <span class="timer-num">00</span>
+                    <span class="timer-unit">seconds</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Left Temple Gate Door -->
+              <div class="gate-door gate-left" id="leftGate">
+                <div class="gate-inner-border"></div>
+                <div class="gate-om-symbol">ॐ</div>
+                <div class="gate-handle-half left-handle"></div>
+              </div>
+
+              <!-- Right Temple Gate Door -->
+              <div class="gate-door gate-right" id="rightGate">
+                <div class="gate-inner-border"></div>
+                <div class="gate-om-symbol">ॐ</div>
+                <div class="gate-handle-half right-handle"></div>
+              </div>
+
+              <!-- Center Interactive Open Button -->
+              <button
+                class="gate-open-btn"
+                id="gateToggleBtn"
+                onclick="toggleSanctuaryGates()"
+              >
+                <span class="btn-pulse-text">OPEN</span>
+              </button>
+
+              <!-- Confetti Canvas Layer for Pop-out Effect -->
+              <canvas
+                class="absolute inset-0 z-10 cursor-pointer touch-none"
+                id="confettiCanvas"
+                style="
+                  pointer-events: none;
+                  opacity: 0;
+                  width: 100%;
+                  height: 100%;
+                "
+              ></canvas>
+            </div>
+          </section>
+
+          <!-- SECTION 4: RSVP & VENUE MAP -->
+          <section class="rsvp-section">
+            <div class="section-title-container">
+              <span class="sub-heading-text">Confirm Attendance</span>
+              <h2 class="main-heading-text">
+                Save the calender &amp; Location
+              </h2>
+              <div class="gold-divider-line"></div>
+            </div>
+
+            <div class="rsvp-card">
+              <p class="rsvp-text">
+                We request the pleasure of your presence to bless the couple on
+                their auspicious day.
+              </p>
+
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Plot+No-1269,+Banjara+Hills+Road+No.+12,+Bhavani+Nagar,+Banjara+Hills,+Hyderabad,+Telangana+500034"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="map-button"
+                >Get Directions</a
+              >
+
+              <!-- Save to Calendar Button -->
+              <a
+                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Engagement:+Dibya+Ranjan+%26+Arya+Prabha&dates=20261025T053000Z/20261025T073000Z&details=Join+us+in+celebrating+the+engagement+of+Dibya+Ranjan+and+Arya+Prabha!&location=Plot+No-1269,+Banjara+Hills+Road+No.+12,+Bhavani+Nagar,+Banjara+Hills,+Hyderabad,+Telangana+500034"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="calendar-button"
+                id="calendarButton"
+                >Save to Calendar</a
+              >
+            </div>
+          </section>
+
+          <!-- SECTION 5: THANK YOU SECTION -->
+          <section class="thank-you-section">
+            <!-- Background Video -->
+            <video
+              class="thank-you-video"
+              autoplay
+              loop
+              muted
+              playsinline
+              src="https://res.cloudinary.com/dlmuywxpn/video/upload/q_auto/f_auto/v1779790720/Green_White_Floral_Traditional_Indian_Wedding_Invitation_Mobile_Video_2_tmsmb6.mp4"
+            ></video>
+
+            <!-- Content Overlay -->
+            <div class="thank-you-content">
+              <!-- Sacred Kalash Image -->
+              <img
+                alt="Sacred Kalash"
+                class="kalash-img"
+                src="./temple-sacred-kalash.png"
+              />
+
+              <span class="sub-heading-text">With Gratitude</span>
+              <h2 class="main-heading-text">Thank You</h2>
+              <div class="gold-divider-line"></div>
+
+              <p class="thank-you-text">
+                It is the greatest honor to have you as part of our story. We
+                can't wait to celebrate with you!
+              </p>
+
+              <!-- Flower Urns & Couple Name Grid -->
+              <div class="couple-urn-container">
+                <img
+                  alt="Flower Urn"
+                  class="flower-urn-img"
+                  src="./temple-flower-urn.png"
+                />
+                <div class="thank-you-couple">
+                  Dibya <br />&amp;<br />
+                  Arya
+                </div>
+                <img
+                  alt="Flower Urn"
+                  class="flower-urn-img urn-flipped"
+                  src="./temple-flower-urn.png"
+                />
+              </div>
+
+              <!-- Footer Blessing -->
+              <div class="thank-you-footer border-t">
+                <p class="footer-blessing-text"></p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <!-- Fullscreen Image Zoom Lightbox Overlay -->
+    <div
+      class="photo-zoom-lightbox"
+      id="zoomLightbox"
+      onclick="closeZoomModal()"
+    >
+      <span class="lightbox-close-btn">&times;</span>
+      <img
+        id="zoomedImg"
+        src=""
+        alt="Enlarged Photo"
+        onclick="event.stopPropagation()"
+      />
+    </div>
+
+    <script>
+      function startTransition() {
+        const badge = document.getElementById("badgeContainer");
+        const video = document.getElementById("transitionVideo");
+        const bgLanding = document.getElementById("bgLanding");
+        const bgInvitation = document.getElementById("bgInvitation");
+        const overlay = document.getElementById("invitationOverlay");
+
+        badge.classList.add("badge-hidden");
+        bgInvitation.classList.add("invitation-active");
+        video.classList.add("video-active");
+        video.play();
+
+        bgLanding.style.display = "none";
+
+        video.ontimeupdate = function () {
+          if (video.duration && video.duration - video.currentTime < 0.3) {
+            overlay.classList.add("invitation-visible");
+          }
+        };
+
+        video.onended = function () {
+          video.classList.remove("video-active");
+          overlay.classList.add("invitation-visible");
+        };
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const stage = document.getElementById("stage");
+        const badge = document.getElementById("openInvitationButton");
+        const video = document.querySelector(".bg-video");
+        const weddingAudio = document.getElementById("weddingAudio");
+        const audioToggle = document.getElementById("audioToggle");
+        const calendarButton = document.getElementById("calendarButton");
+        const bgLanding = document.getElementById("bgLanding");
+        const bgInvitation = document.getElementById("bgInvitation");
+        const invitationOverlay = document.querySelector(".invitation-overlay");
+
+        // Lock scrolling initially
+        stage.classList.add("no-scroll");
+        document.body.classList.add("no-scroll");
+
+        const isIOS =
+          /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+        if (isIOS) {
+          calendarButton.href = "./engagement.ics";
+        }
+
+        badge.addEventListener("click", () => {
+          // Reveal the invitation image immediately, then play the transition over it.
+          badge.classList.add("badge-hidden");
+          bgLanding.style.display = "none";
+          bgInvitation.classList.add("invitation-active");
+          video.classList.add("video-active");
+
+          if (video && typeof video.play === "function") {
+            const playback = video.play();
+            if (playback && typeof playback.catch === "function") {
+              playback.catch(() => unlockInvitation());
+            }
+          }
+
+          video.onended = () => unlockInvitation();
+          video.onerror = () => unlockInvitation();
+        });
+
+        function unlockInvitation() {
+          bgLanding.style.display = "none";
+          bgInvitation.classList.add("invitation-active");
+          video.classList.remove("video-active");
+
+          setTimeout(() => {
+            invitationOverlay.classList.add("invitation-visible");
+          }, 450);
+
+          const audioPlayback = weddingAudio.play();
+          if (audioPlayback && typeof audioPlayback.then === "function") {
+            audioPlayback
+              .then(() => audioToggle.classList.add("audio-visible"))
+              .catch(() => {});
+          } else {
+            audioToggle.classList.add("audio-visible");
+          }
+
+          stage.classList.remove("no-scroll");
+          document.body.classList.remove("no-scroll");
+        }
+
+        audioToggle.addEventListener("click", () => {
+          weddingAudio.muted = !weddingAudio.muted;
+          const isMuted = weddingAudio.muted;
+          audioToggle.setAttribute("aria-pressed", String(!isMuted));
+          audioToggle.setAttribute(
+            "aria-label",
+            isMuted ? "Unmute wedding music" : "Mute wedding music"
+          );
+          audioToggle.querySelector(".audio-toggle-icon").textContent = isMuted
+            ? "♪"
+            : "♫";
+        });
+      });
+
+      function scrollToCoupleSection() {
+        const coupleSection = document.getElementById("coupleSection");
+        coupleSection.scrollIntoView({ behavior: "smooth" });
+      }
+
+      function toggleSanctuaryGates() {
+        const leftGate = document.getElementById("leftGate");
+        const rightGate = document.getElementById("rightGate");
+        const btn = document.getElementById("gateToggleBtn");
+
+        leftGate.classList.toggle("gate-open-left");
+        rightGate.classList.toggle("gate-open-right");
+        btn.classList.toggle("btn-fade-out");
+
+        // Trigger Celebration Pop-out Effect matching festival/wedding colors
+        setTimeout(() => {
+          if (typeof confetti === "function") {
+            confetti({
+              particleCount: 90,
+              spread: 75,
+              origin: { y: 0.65 },
+              colors: ["#c9953a", "#f7e8b6", "#8c251e", "#ffffff"],
+            });
+          }
+        }, 400);
+      }
+
+      const targetDate = new Date("October 25, 2026 00:00:00").getTime();
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        const timerBoxes = document.querySelectorAll(".timer-num");
+
+        if (diff <= 0) {
+          if (timerBoxes.length === 4) {
+            timerBoxes[0].textContent = "00";
+            timerBoxes[1].textContent = "00";
+            timerBoxes[2].textContent = "00";
+            timerBoxes[3].textContent = "00";
+          }
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        if (timerBoxes.length === 4) {
+          timerBoxes[0].textContent = String(days).padStart(2, "0");
+          timerBoxes[1].textContent = String(hours).padStart(2, "0");
+          timerBoxes[2].textContent = String(minutes).padStart(2, "0");
+          timerBoxes[3].textContent = String(seconds).padStart(2, "0");
+        }
+      }
+
+      // Intersection Observer for Scroll-triggered Transitions
+      document.addEventListener("DOMContentLoaded", () => {
+        const animatedElements = document.querySelectorAll(
+          "#coupleTitle, #groomCard, #brideCard"
+        );
+
+        const observerOptions = {
+          root: document.getElementById("stage"),
+          threshold: 0.2, // Triggers when 20% of element is visible
+        };
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+            }
+          });
+        }, observerOptions);
+
+        animatedElements.forEach((el) => scrollObserver.observe(el));
+      });
+
+      // Image Zoom Modal Functions
+      function openZoomModal(imageSrc) {
+        const lightbox = document.getElementById("zoomLightbox");
+        const zoomedImg = document.getElementById("zoomedImg");
+
+        zoomedImg.src = imageSrc;
+        lightbox.classList.add("active");
+      }
+
+      function closeZoomModal() {
+        const lightbox = document.getElementById("zoomLightbox");
+        lightbox.classList.remove("active");
+      }
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    </script>
+  </body>
+</html>

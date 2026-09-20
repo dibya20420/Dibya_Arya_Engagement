@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Dibya Ranjan and Arya Prabha//Engagement//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:dibya-arya-engagement-20261025@arya-dibya
+DTSTAMP:20260920T000000Z
+DTSTART:20261025T053000Z
+DTEND:20261025T073000Z
+SUMMARY:Engagement: Dibya Ranjan & Arya Prabha
+DESCRIPTION:Join us in celebrating the engagement of Dibya Ranjan and Arya Prabha!
+LOCATION:Plot No-1269, Banjara Hills Road No. 12, Bhavani Nagar, Banjara Hills, Hyderabad, Telangana 500034
+END:VEVENT
+END:VCALENDAR
