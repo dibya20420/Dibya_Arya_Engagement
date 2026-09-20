@@ -62,6 +62,14 @@
           />
         </audio>
 
+        <audio
+          id="startingAudio"
+          preload="auto"
+          aria-label="Invitation opening music"
+        >
+          <source src="./starting_audio.mp3" type="audio/mpeg" />
+        </audio>
+
         <!-- Badge Overlay (Page 1) -->
         <div class="badge-container" id="badgeContainer">
           <div class="badge-custom-wrapper" id="openInvitationButton">
@@ -504,6 +512,7 @@
         const badge = document.getElementById("openInvitationButton");
         const video = document.querySelector(".bg-video");
         const weddingAudio = document.getElementById("weddingAudio");
+        const startingAudio = document.getElementById("startingAudio");
         const audioToggle = document.getElementById("audioToggle");
         const calendarButton = document.getElementById("calendarButton");
         const bgLanding = document.getElementById("bgLanding");
@@ -518,6 +527,7 @@
         let invitationUnlocked = false;
         let themeVideoStarted = false;
         let themeSectionActive = false;
+        let audioEnabled = true;
 
         function showThemeImage() {
           themeImage.classList.add("theme-image-visible");
@@ -595,12 +605,48 @@
           calendarButton.href = "./engagement.ics";
         }
 
+        function playWeddingAudio() {
+          weddingAudio.muted = !audioEnabled;
+          weddingAudio.loop = true;
+          const playback = weddingAudio.play();
+          if (playback && typeof playback.then === "function") {
+            playback
+              .then(() => audioToggle.classList.add("audio-visible"))
+              .catch(() => {});
+          } else {
+            audioToggle.classList.add("audio-visible");
+          }
+        }
+
+        function finishStartingAudio() {
+          startingAudio.pause();
+          startingAudio.currentTime = 0;
+          playWeddingAudio();
+        }
+
         badge.addEventListener("click", () => {
           badge.classList.add("badge-hidden");
           bgLanding.style.display = "none";
           video.classList.add("video-active");
-          video.muted = false;
-          video.volume = 1;
+          video.muted = true;
+          audioToggle.classList.add("audio-visible");
+          audioToggle.setAttribute("aria-pressed", "true");
+          weddingAudio.pause();
+          weddingAudio.currentTime = 0;
+          weddingAudio.muted = true;
+          startingAudio.muted = !audioEnabled;
+          startingAudio.volume = 1;
+          startingAudio.addEventListener("ended", finishStartingAudio, {
+            once: true,
+          });
+
+          const startingPlayback = startingAudio.play();
+          if (
+            startingPlayback &&
+            typeof startingPlayback.catch === "function"
+          ) {
+            startingPlayback.catch(finishStartingAudio);
+          }
 
           if (video && typeof video.play === "function") {
             const playback = video.play();
@@ -629,24 +675,17 @@
             invitationOverlay.classList.add("invitation-visible");
           }, 450);
 
-          const audioPlayback = weddingAudio.play();
-          if (audioPlayback && typeof audioPlayback.then === "function") {
-            audioPlayback
-              .then(() => audioToggle.classList.add("audio-visible"))
-              .catch(() => {});
-          } else {
-            audioToggle.classList.add("audio-visible");
-          }
-
           stage.classList.remove("no-scroll");
           document.body.classList.remove("no-scroll");
           requestAnimationFrame(checkThemeVideoVisibility);
         }
 
         audioToggle.addEventListener("click", () => {
-          weddingAudio.muted = !weddingAudio.muted;
-          const isMuted = weddingAudio.muted;
-          audioToggle.setAttribute("aria-pressed", String(!isMuted));
+          audioEnabled = !audioEnabled;
+          startingAudio.muted = !audioEnabled;
+          weddingAudio.muted = !audioEnabled;
+          const isMuted = !audioEnabled;
+          audioToggle.setAttribute("aria-pressed", String(audioEnabled));
           audioToggle.setAttribute(
             "aria-label",
             isMuted ? "Unmute wedding music" : "Mute wedding music"
