@@ -46,7 +46,6 @@
           class="bg-layer bg-video"
           playsinline
           preload="auto"
-          muted
         >
           <source src="./transition.mp4" type="video/mp4" />
         </video>
@@ -375,6 +374,15 @@
           </section>
 
           <div class="engagement-theme-panel">
+            <video
+              class="engagement-theme-video"
+              muted
+              playsinline
+              preload="metadata"
+              aria-hidden="true"
+            >
+              <source src="./engagement_theme.mp4" type="video/mp4" />
+            </video>
             <img
               class="engagement-theme-image"
               src="./engagement_theme.png"
@@ -491,6 +499,96 @@
         const bgLanding = document.getElementById("bgLanding");
         const bgInvitation = document.getElementById("bgInvitation");
         const invitationOverlay = document.querySelector(".invitation-overlay");
+        const themePanel = document.querySelector(".engagement-theme-panel");
+        const themeVideo = document.querySelector(".engagement-theme-video");
+        const themeImage = document.querySelector(".engagement-theme-image");
+        let invitationUnlocked = false;
+        let themeVideoStarted = false;
+        let themeSectionActive = false;
+        let themeTargetTop = null;
+        let themeSnapPending = false;
+
+        function showThemeImage() {
+          themeImage.classList.add("theme-image-visible");
+        }
+
+        function finishThemeSection() {
+          showThemeImage();
+          setTimeout(() => {
+            stage.classList.remove("theme-section-locked");
+            document.body.classList.remove("theme-section-locked");
+          }, 1200);
+        }
+
+        themeVideo.addEventListener("ended", finishThemeSection);
+        themeVideo.addEventListener("error", finishThemeSection);
+
+        function startThemeVideo() {
+          if (themeVideoStarted) return;
+          themeVideoStarted = true;
+
+          const playWhenReady = () => {
+            const playback = themeVideo.play();
+            if (playback && typeof playback.catch === "function") {
+              playback.catch(() => {
+                themeVideoStarted = false;
+                finishThemeSection();
+              });
+            }
+          };
+
+          if (themeVideo.readyState >= 3) {
+            playWhenReady();
+          } else {
+            themeVideo.addEventListener("canplay", playWhenReady, {
+              once: true,
+            });
+            themeVideo.load();
+          }
+        }
+
+        function startThemeVideoWhenSettled() {
+          if (!themeSnapPending || themeTargetTop === null) return;
+
+          if (Math.abs(stage.scrollTop - themeTargetTop) > 4) {
+            requestAnimationFrame(startThemeVideoWhenSettled);
+            return;
+          }
+
+          themeSnapPending = false;
+          stage.classList.add("theme-section-locked");
+          document.body.classList.add("theme-section-locked");
+          startThemeVideo();
+        }
+
+        function checkThemeVideoVisibility() {
+          if (themeSectionActive) {
+            startThemeVideoWhenSettled();
+            return;
+          }
+
+          const stageBounds = stage.getBoundingClientRect();
+          const themeBounds = themePanel.getBoundingClientRect();
+          const hasReachedTheme =
+            themeBounds.top < stageBounds.bottom &&
+            themeBounds.bottom > stageBounds.top;
+
+          if (!hasReachedTheme) return;
+
+          themeSectionActive = true;
+          themeTargetTop =
+            themeBounds.top - stageBounds.top + stage.scrollTop;
+          themeSnapPending = true;
+          stage.scrollTo({ top: themeTargetTop, behavior: "smooth" });
+          startThemeVideoWhenSettled();
+        }
+
+        stage.addEventListener("scroll", checkThemeVideoVisibility, {
+          passive: true,
+        });
+        window.addEventListener("scroll", checkThemeVideoVisibility, {
+          passive: true,
+        });
 
         // Lock scrolling initially
         stage.classList.add("no-scroll");
@@ -508,6 +606,8 @@
           badge.classList.add("badge-hidden");
           bgLanding.style.display = "none";
           video.classList.add("video-active");
+          video.muted = false;
+          video.volume = 1;
 
           if (video && typeof video.play === "function") {
             const playback = video.play();
@@ -521,9 +621,16 @@
         });
 
         function unlockInvitation() {
+          if (invitationUnlocked) return;
+          invitationUnlocked = true;
+
           bgLanding.style.display = "none";
           bgInvitation.classList.add("invitation-active");
-          video.classList.remove("video-active");
+
+          setTimeout(() => {
+            video.classList.remove("video-active");
+            video.pause();
+          }, 850);
 
           setTimeout(() => {
             invitationOverlay.classList.add("invitation-visible");
@@ -540,6 +647,7 @@
 
           stage.classList.remove("no-scroll");
           document.body.classList.remove("no-scroll");
+          requestAnimationFrame(checkThemeVideoVisibility);
         }
 
         audioToggle.addEventListener("click", () => {
