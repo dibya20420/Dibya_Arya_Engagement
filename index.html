@@ -374,6 +374,12 @@
           </section>
 
           <div class="engagement-theme-panel">
+            <img
+              class="engagement-theme-pre-image"
+              src="./engagement_theme_pre.png"
+              alt=""
+              aria-hidden="true"
+            />
             <video
               class="engagement-theme-video"
               muted
@@ -399,6 +405,10 @@
               loop
               muted
               playsinline
+              webkit-playsinline
+              disablepictureinpicture
+              controlslist="nodownload noplaybackrate nofullscreen"
+              disableRemotePlayback
               src="https://res.cloudinary.com/dlmuywxpn/video/upload/q_auto/f_auto/v1779790720/Green_White_Floral_Traditional_Indian_Wedding_Invitation_Mobile_Video_2_tmsmb6.mp4"
             ></video>
 
@@ -500,13 +510,14 @@
         const bgInvitation = document.getElementById("bgInvitation");
         const invitationOverlay = document.querySelector(".invitation-overlay");
         const themePanel = document.querySelector(".engagement-theme-panel");
+        const themePreImage = document.querySelector(
+          ".engagement-theme-pre-image"
+        );
         const themeVideo = document.querySelector(".engagement-theme-video");
         const themeImage = document.querySelector(".engagement-theme-image");
         let invitationUnlocked = false;
         let themeVideoStarted = false;
         let themeSectionActive = false;
-        let themeTargetTop = null;
-        let themeSnapPending = false;
 
         function showThemeImage() {
           themeImage.classList.add("theme-image-visible");
@@ -528,6 +539,8 @@
           themeVideoStarted = true;
 
           const playWhenReady = () => {
+            themePreImage.classList.add("theme-pre-image-hidden");
+            themeVideo.classList.add("theme-video-active");
             const playback = themeVideo.play();
             if (playback && typeof playback.catch === "function") {
               playback.catch(() => {
@@ -547,40 +560,20 @@
           }
         }
 
-        function startThemeVideoWhenSettled() {
-          if (!themeSnapPending || themeTargetTop === null) return;
-
-          if (Math.abs(stage.scrollTop - themeTargetTop) > 4) {
-            requestAnimationFrame(startThemeVideoWhenSettled);
-            return;
-          }
-
-          themeSnapPending = false;
-          stage.classList.add("theme-section-locked");
-          document.body.classList.add("theme-section-locked");
-          startThemeVideo();
-        }
-
         function checkThemeVideoVisibility() {
-          if (themeSectionActive) {
-            startThemeVideoWhenSettled();
-            return;
-          }
+          if (themeSectionActive) return;
 
           const stageBounds = stage.getBoundingClientRect();
           const themeBounds = themePanel.getBoundingClientRect();
-          const hasReachedTheme =
-            themeBounds.top < stageBounds.bottom &&
-            themeBounds.bottom > stageBounds.top;
+          const hasReachedThemeTop = themeBounds.top <= stageBounds.top + 1;
 
-          if (!hasReachedTheme) return;
+          if (!hasReachedThemeTop) return;
 
           themeSectionActive = true;
-          themeTargetTop =
-            themeBounds.top - stageBounds.top + stage.scrollTop;
-          themeSnapPending = true;
-          stage.scrollTo({ top: themeTargetTop, behavior: "smooth" });
-          startThemeVideoWhenSettled();
+          stage.scrollTop += themeBounds.top - stageBounds.top;
+          stage.classList.add("theme-section-locked");
+          document.body.classList.add("theme-section-locked");
+          startThemeVideo();
         }
 
         stage.addEventListener("scroll", checkThemeVideoVisibility, {

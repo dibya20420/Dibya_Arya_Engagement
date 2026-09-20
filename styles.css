@@ -1180,6 +1180,7 @@ body {
   overflow: hidden;
 }
 
+.engagement-theme-pre-image,
 .engagement-theme-video,
 .engagement-theme-image {
   display: block;
@@ -1188,15 +1189,36 @@ body {
   object-fit: cover;
 }
 
+.engagement-theme-pre-image,
 .engagement-theme-video {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 1;
+}
+
+.engagement-theme-pre-image {
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+.engagement-theme-pre-image.theme-pre-image-hidden {
+  opacity: 0;
+}
+
+.engagement-theme-video {
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.engagement-theme-video.theme-video-active {
+  opacity: 1;
 }
 
 .engagement-theme-image {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
   opacity: 0;
   transition: opacity 1.2s ease-in-out;
 }
@@ -1484,6 +1506,13 @@ body {
   object-fit: cover;
   z-index: 0;
   pointer-events: none;
+}
+
+.thank-you-video::-webkit-media-controls,
+.thank-you-video::-webkit-media-controls-enclosure,
+.thank-you-video::-webkit-media-controls-panel {
+  display: none !important;
+  opacity: 0 !important;
 }
 
 .thank-you-content {
