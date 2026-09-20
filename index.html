@@ -453,7 +453,6 @@
         const overlay = document.getElementById("invitationOverlay");
 
         badge.classList.add("badge-hidden");
-        bgInvitation.classList.add("invitation-active");
         video.classList.add("video-active");
         video.play();
 
@@ -495,10 +494,8 @@
         }
 
         badge.addEventListener("click", () => {
-          // Reveal the invitation image immediately, then play the transition over it.
           badge.classList.add("badge-hidden");
           bgLanding.style.display = "none";
-          bgInvitation.classList.add("invitation-active");
           video.classList.add("video-active");
 
           if (video && typeof video.play === "function") {

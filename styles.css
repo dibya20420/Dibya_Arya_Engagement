@@ -86,7 +86,7 @@ body {
   z-index: 3;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.9s ease-in-out;
+  transition: none;
 }
 
 .bg-video.video-active {
@@ -322,6 +322,38 @@ body {
 
 .audio-toggle-icon {
   line-height: 1;
+}
+
+.photo-zoom-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(43, 31, 23, 0.88);
+}
+
+.photo-zoom-lightbox.active {
+  display: flex;
+}
+
+.photo-zoom-lightbox img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.lightbox-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  color: #fff;
+  font-size: 36px;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .sub-title {
