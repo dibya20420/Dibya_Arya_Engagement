@@ -258,7 +258,7 @@ body {
   align-items: center;
   justify-content: space-between;
   text-align: center;
-  padding: 6vh 0 4vh 0;
+  padding: 3vh 10px 2.5vh;
   z-index: 10;
   opacity: 0;
   transform: translateY(10px);
@@ -276,6 +276,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  max-width: 390px;
 }
 
 .audio-toggle {
@@ -358,18 +360,18 @@ body {
 
 .sub-title {
   font-family: "Montserrat", sans-serif;
-  font-size: 11px;
+  font-size: clamp(8px, 2.3vw, 10px);
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 2.5px;
   color: var(--text-dark);
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .couple-names {
   font-family: "Playfair Display", serif;
   font-style: italic;
-  font-size: clamp(30px, 9.5vw, 42px);
+  font-size: clamp(25px, 7.8vw, 36px);
   font-weight: 600;
   color: var(--maroon);
   line-height: 1.15;
@@ -379,10 +381,10 @@ body {
 .ampersand {
   font-family: "Cinzel", serif;
   font-style: normal;
-  font-size: 20px;
+  font-size: 16px;
   color: var(--gold);
   display: block;
-  margin: 2px 0;
+  margin: 1px 0;
 }
 
 .gold-ornament {
@@ -390,7 +392,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 12px 0;
+  margin: 6px 0;
 }
 
 .gold-ornament::before,
@@ -410,99 +412,104 @@ body {
 .venue-details {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
 }
 
 .venue-title {
   font-family: "Montserrat", sans-serif;
-  font-size: 12px;
+  font-size: clamp(9px, 2.5vw, 11px);
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 1.8px;
   color: var(--gold-dark);
   text-transform: uppercase;
 }
 
 .venue-location {
   font-family: "Cinzel", serif;
-  font-size: 14px;
+  font-size: clamp(10px, 3vw, 13px);
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 1.6px;
   color: var(--text-dark);
   text-transform: uppercase;
 }
 
 .city-name {
   font-family: "Montserrat", sans-serif;
-  font-size: 11px;
+  font-size: clamp(8px, 2.3vw, 10px);
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 1.6px;
   color: var(--text-dark);
   text-transform: uppercase;
 }
 
 .mouse-scroll-indicator {
+  position: relative;
+  top: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
-  padding: 12px;
+  padding: 8px;
   user-select: none;
-  color: var(--red-sanctuary);
+  color: #4a1f16;
 }
 
 .mouse-capsule {
-  width: 22px;
-  height: 36px;
-  border: 3px solid var(--red-sanctuary);
-  border-radius: 14px;
+  width: 42px;
+  height: 42px;
+  border: 2px solid #f5d27a;
+  border-radius: 50%;
   position: relative;
   display: flex;
+  align-items: center;
   justify-content: center;
-  background: rgba(253, 250, 245, 0.28);
-  box-shadow: 0 2px 8px rgba(62, 30, 18, 0.4);
+  background: rgba(255, 248, 232, 0.96);
+  box-shadow: 0 0 0 2px rgba(245, 210, 122, 0.25),
+    0 3px 8px rgba(62, 30, 18, 0.38);
 }
 
-.mouse-wheel {
-  width: 4px;
-  height: 8px;
-  background-color: var(--red-sanctuary);
-  border-radius: 3px;
-  position: absolute;
-  top: 5px;
-  animation: mouseScroll 1.8s ease-in-out infinite;
+.chevron-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  transform: translateY(-2px);
 }
 
 .chevron-down {
-  width: 12px;
-  height: 12px;
-  border-right: 3px solid var(--red-sanctuary);
-  border-bottom: 3px solid var(--red-sanctuary);
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid #4a1f16;
+  border-bottom: 3px solid #4a1f16;
   transform: rotate(45deg);
-  filter: drop-shadow(0 1px 2px rgba(62, 30, 18, 0.4));
+  filter: drop-shadow(0 1px 1px rgba(62, 30, 18, 0.3));
   animation: arrowBounce 1.1s ease-in-out infinite;
 }
 
-@keyframes mouseScroll {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(11px);
-  }
+.chevron-second {
+  animation-delay: 0.16s;
+}
+
+.scroll-down-label {
+  color: #F4D58D;
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(62, 30, 18, 0.7);
 }
 
 @keyframes arrowBounce {
   0%,
   100% {
-    opacity: 0.55;
+    opacity: 0.5;
     transform: translateY(0) rotate(45deg);
   }
   50% {
     opacity: 1;
-    transform: translateY(8px) rotate(45deg);
+    transform: translateY(5px) rotate(45deg);
   }
 }
 
@@ -1287,7 +1294,7 @@ body {
 
 @media (max-width: 320px) {
   .couple-names {
-    font-size: 29px;
+    font-size: 25px;
   }
 
   .main-heading-text {
@@ -1523,7 +1530,7 @@ body {
   .mandala-bg-bride,
   .bell-img,
   .heart-icon,
-  .mouse-wheel {
+  .chevron-down {
     animation: none !important;
   }
 }
