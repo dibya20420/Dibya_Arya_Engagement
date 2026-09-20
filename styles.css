@@ -1168,6 +1168,18 @@ body {
   margin-bottom: 20px;
 }
 
+.engagement-theme-panel {
+  width: 100%;
+  background: var(--bg-cream);
+  line-height: 0;
+}
+
+.engagement-theme-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* BUTTONS GROUP WITH ABSOLUTE CENTERED ALIGNMENT & SPACING */
 .action-buttons-group {
   display: flex;
