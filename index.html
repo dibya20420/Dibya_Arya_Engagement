@@ -285,9 +285,23 @@
               <div class="countdown-inner-content">
                 <span class="date-header-tag">Our Engagement Date</span>
                 <h4 class="wedding-date-heading">Sunday, 25 October 2026</h4>
-                <span class="venue-location-subtag"
-                  >October 25, 2026 • Jagannath Temple near KIIT college</span
-                >
+                <div class="time-divider" aria-hidden="true">
+                  <span class="time-divider-line"></span>
+                  <svg class="lotus-ornament" viewBox="0 0 32 24" role="img" aria-label="Lotus">
+                    <path d="M16 21C10 21 6 18 6 14c0-3 2-6 5-8 0 5 2 8 5 10 3-2 5-5 5-10 3 2 5 5 5 8 0 4-4 7-10 7Z" />
+                    <path d="M16 16c-4-2-7-6-7-11 4 1 6 4 7 8 1-4 3-7 7-8 0 5-3 9-7 11Z" />
+                    <path d="M4 21h24" />
+                  </svg>
+                  <span class="time-divider-line"></span>
+                </div>
+                <div class="event-time-row">10:00 AM <span>–</span> 1:00 PM</div>
+                <div class="venue-location-subtag">
+                  <svg class="location-pin" viewBox="0 0 24 28" role="img" aria-label="Location">
+                    <path d="M12 26S4 17.4 4 10.7a8 8 0 1 1 16 0C20 17.4 12 26 12 26Z" />
+                    <circle cx="12" cy="10.5" r="2.8" />
+                  </svg>
+                  Jagannath Temple near KIIT College
+                </div>
                 <div class="countdown-units-grid">
                   <div class="timer-box">
                     <span class="timer-num">00</span>
@@ -371,7 +385,7 @@
 
               <!-- Save to Calendar Button -->
               <a
-                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Engagement:+Dibya+Ranjan+%26+Arya+Prabha&dates=20261025T053000Z/20261025T073000Z&details=Join+us+in+celebrating+the+engagement+of+Dibya+Ranjan+and+Arya+Prabha!&location=KIIT+Campus+No.+10,+Shree+Banik+Kshetra,+KISS+Road,+Patharagadia,+Kiss+Rd,+near+KISS+-+Kalinga+Institute+of+Social+Sciences,+Chandaka+Industrial+Estate,+Patia,+Bhubaneswar,+Odisha+751024"
+                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Engagement:+Dibya+Ranjan+%26+Arya+Prabha&dates=20261025T043000Z/20261025T073000Z&details=Join+us+in+celebrating+the+engagement+of+Dibya+Ranjan+and+Arya+Prabha!&location=KIIT+Campus+No.+10,+Shree+Banik+Kshetra,+KISS+Road,+Patharagadia,+Kiss+Rd,+near+KISS+-+Kalinga+Institute+of+Social+Sciences,+Chandaka+Industrial+Estate,+Patia,+Bhubaneswar,+Odisha+751024"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="calendar-button"
@@ -723,7 +737,7 @@
         }, 400);
       }
 
-      const targetDate = new Date("October 25, 2026 00:00:00").getTime();
+      const targetDate = new Date("October 25, 2026 10:00:00").getTime();
 
       function updateCountdown() {
         const now = new Date().getTime();

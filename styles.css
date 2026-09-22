@@ -909,7 +909,8 @@ body {
 .countdown-gates-section {
   position: relative;
   width: 100%;
-  padding: 50px 16px 60px 16px;
+  min-height: 470px;
+  padding: 54px 16px 62px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -926,14 +927,14 @@ body {
   height: 100%;
   z-index: 1;
   background-image: linear-gradient(
-      rgba(251, 248, 239, 0.7),
-      rgba(251, 248, 239, 0.7)
+      rgba(247, 235, 207, 0.56),
+      rgba(247, 235, 207, 0.68)
     ),
     url("temple-bg.15oulsz4uecu-.png");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  filter: blur(1px);
+  filter: blur(1.6px);
   transform: scale(1.05);
   pointer-events: none;
 }
@@ -946,21 +947,26 @@ body {
 }
 
 .gates-instruction-text {
-  font-size: 12px;
+  max-width: 350px;
+  font-family: "Playfair Display", serif;
+  font-size: 14px;
+  line-height: 1.45;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   font-style: italic;
-  color: #8a7156;
+  color: #6b4f2c;
   font-weight: 600;
-  margin-top: 10px;
-  margin-bottom: 24px;
+  margin-top: 12px;
+  margin-bottom: 26px;
 }
 
 .sanctuary-gates-frame {
   position: relative;
   width: 100%;
-  max-width: 360px;
-  height: 320px;
-  border-radius: 20px;
-  border: 2px solid var(--gold-primary);
+  max-width: 382px;
+  height: 366px;
+  border-radius: 28px;
+  border: 2px solid #c9953a;
   background-color: #2b170e;
   overflow: hidden;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
@@ -976,7 +982,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 28px 22px 24px;
   color: #ffffff;
   z-index: 1;
 }
@@ -987,34 +993,98 @@ body {
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--gold-light);
+  color: #f7e8b6;
 }
 
 .wedding-date-heading {
   font-family: "Playfair Display", serif;
   font-style: italic;
-  font-size: 22px;
+  font-size: clamp(22px, 6vw, 28px);
+  line-height: 1.2;
   color: #ffffff;
-  margin: 6px 0;
+  margin: 14px 0 10px;
+}
+
+.event-time-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: "Playfair Display", serif;
+  font-size: 23px;
+  font-weight: 700;
+  color: #f7e8b6;
+  margin: 8px 0 14px;
+}
+
+.time-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.time-divider-line {
+  content: "";
+  width: 58px;
+  height: 1px;
+  background: #c9953a;
+}
+
+.lotus-ornament {
+  width: 29px;
+  height: 22px;
+  color: #f7e8b6;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.35;
+}
+
+.event-time-row span {
+  color: #f7e8b6;
+  font-size: 15px;
 }
 
 .venue-location-subtag {
   font-size: 11px;
   color: var(--gold-border-light);
-  margin-bottom: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.location-pin {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 13px;
+  width: 13px;
+  height: 16px;
+  color: #f7e8b6;
+  fill: currentColor;
+  stroke: #f7e8b6;
+  stroke-width: 1;
+  stroke-linejoin: round;
 }
 
 .countdown-units-grid {
   display: flex;
-  gap: 10px;
+  width: 100%;
+  max-width: 340px;
+  gap: 12px;
 }
 
 .timer-box {
-  background: rgba(255, 255, 255, 0.1);
+  min-height: 76px;
+  background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(235, 216, 195, 0.3);
   backdrop-filter: blur(4px);
-  border-radius: 10px;
-  padding: 8px 10px;
+  border-radius: 12px;
+  padding: 10px 6px 8px;
   min-width: 0;
   flex: 1 1 0;
   display: flex;
@@ -1024,7 +1094,7 @@ body {
 
 .timer-num {
   font-family: "Playfair Display", serif;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 700;
   color: var(--gold-light);
 }
@@ -1032,6 +1102,7 @@ body {
 .timer-unit {
   font-family: "Montserrat", sans-serif;
   font-size: 9px;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #ffffff;
